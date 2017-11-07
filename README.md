@@ -2,7 +2,7 @@
 
 Collection of advice on optimizing compile times of Swift projects.
 
-Swift is constantly improving ❤️. In its current state (Swift 4), though, long compile times are one of the biggest hindrance when working on medium-to-large apps. The goal of this project is to gather in one place tips and tricks that will help you shorten build.
+Swift is constantly improving ❤️. For the time being, though, long compile times persist as a big issue when working on medium-to-large apps. The goal of this project is to gather all there is that can help you shorten your build times.
 
 👷🏻 Maintainer: [Arek Holko](https://twitter.com/arekholko). Anything missing? **Issues and pull requests welcomed!**
 
