@@ -48,7 +48,7 @@ Previous section described working on an expression- and function-level but itâ€
 
 Thereâ€™s no UI in Xcode for that, though, so you have to build the project from the CLI with correct flags set:
 
-```
+```sh
 xcodebuild -destination 'platform=iOS Simulator,name=iPhone 8' \
   -sdk iphonesimulator -project YourProject.xcodeproj \
   -scheme Chuck -configuration Debug \
@@ -63,7 +63,7 @@ tee profile.log
 
 Then extract the interesting statistics using:
 
-```
+```sh
 awk '/Driver Compilation Time/,/Total$/ { print }' profile.log |
   grep compile |
   cut -c 55- |
