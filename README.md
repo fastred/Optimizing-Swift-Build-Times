@@ -23,7 +23,7 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 
 Swift build times are slow mostly because of expensive type checking. By default Xcode doesn't show code that's slow to compile. You can instruct it to show slowly compiling functions and expressions, though by adding:
 
-- `-Xfrontend -warn-long-function-bodies=100` (`100` means 100ms here, you should experiment with this value depending on you computer speed and project)
+- `-Xfrontend -warn-long-function-bodies=100` (`100` means 100ms here, you should experiment with this value depending on your computer speed and project)
 - `-Xfrontend -warn-long-expression-type-checking=100`
 
 to `Other Swift Flags` in build settings:
@@ -44,7 +44,7 @@ Next step is to address code that Swift compiler has problems with. [John Sundel
 - [Swift build time optimizations — Part 2](https://medium.com/swift-programming/swift-build-time-optimizations-part-2-37b0a7514cbe)
 
 # Slowly compiling files
-Previous section described working on an expression- and function-level but it’s also often interesting to know compile times of whole files.
+The previous section described working on an expression- and function-level but it’s often interesting to know compile times of whole files too.
 
 There’s no UI in Xcode for that, though, so you have to build the project from the CLI with correct flags set:
 
@@ -141,7 +141,7 @@ There are two ways you can embed third-party dependencies in your projects:
 1. as a source that gets compiled each time you perform a clean build of your project (examples: [CocoaPods](https://cocoapods.org), git submodules, copy-pasted code, internal libraries in subprojects that the app target depends on)
 2. as a prebuilt framework/library (examples: [Carthage](https://github.com/Carthage/Carthage), static library distributed by a vendor that doesn’t want to provide the source code)
 
-CocoaPods being the most popular [dependency manager](https://twitter.com/arekholko/status/923989580948402177) for iOS by design leads to longer compile times, as the source code of 3rd-party libraries in most cases gets compiled each time you perform a clean build. In general you shouldn’t have to do that often but in reality you do (e.g. because of switching branches, Xcode bugs, etc.).
+CocoaPods being the most popular [dependency manager](https://twitter.com/arekholko/status/923989580948402177) for iOS by design leads to longer compile times, as the source code of 3rd-party libraries in most cases gets compiled each time you perform a clean build. In general you shouldn’t have to do that often but in reality, you do (e.g. because of switching branches, Xcode bugs, etc.).
 
 Carthage, even though it’s harder to use, is a better choice if you care about build times. You build external dependencies only when you change something in the dependency list (add a new framework, update a framework to a newer version, etc.). That may take 5 or 15 minutes to complete but you do it a lot less often than building code embedded with CocoaPods.
 
@@ -152,7 +152,7 @@ Carthage, even though it’s harder to use, is a better choice if you care about
 # Modularization
 Incremental compilation in Swift isn’t perfect. There are projects where changing one string somewhere causes almost a whole project to get recompiled during an incremental build. It’s something that can be debugged and improved but a good tooling for that isn’t available yet.
 
-To avoid issues like that, you should consider splitting your app into modules. In iOS these are either: dynamic frameworks or static libraries (support for Swift was added in Xcode 9).
+To avoid issues like that, you should consider splitting your app into modules. In iOS, these are either: dynamic frameworks or static libraries (support for Swift was added in Xcode 9).
 
 Let’s say your app target depends on an internal framework called `DatabaseKit`. The main guarantee of this approach is that when you change something in your app project, `DatabaseKit` **won’t** get recompiled during an incremental build.
 
@@ -190,7 +190,7 @@ This scheme is useful when your UI tests take too long to run them often.
 
 
 ### App - All Tests Flow
-Builds app and all test targets. Runs all tests. Useful when working on code close to UI which impacts UI tests.
+Builds the app and all test targets. Runs all tests. Useful when working on code close to UI which impacts UI tests.
 
 <img src="assets/app-all-tests-flow@2x.png" width="600">
 
@@ -213,7 +213,7 @@ I recommend comparing build times under same conditions each time, e.g.
 1. Quit Xcode.
 2. Clear Derived Data (`$ rm -rf ~/Library/Developer/Xcode/DerivedData`).
 3. Open your project in Xcode.
-4. Start a build either immediately after Xcode opens or after indexing phase completes. First approach seems to be more representative because starting with Xcode 9 building also performs indexing.
+4. Start a build either immediately after Xcode opens or after indexing phase completes. The first approach seems to be more representative because starting with Xcode 9 building also performs indexing.
 
 Alternatively, you can time builds from the command line:
 
