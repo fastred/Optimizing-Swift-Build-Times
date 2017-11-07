@@ -28,7 +28,7 @@ Swift build times are slow mostly because of expensive type checking. By default
 
 to `Other Swift Flags` in build settings:
 
-![](assets/times@2x.png)
+<img src="assets/times@2x.png" width="732">
 
 Build again and you should now see warnings like these:
 
@@ -92,7 +92,7 @@ You’ll end up with `slowest.log` file containing list of all files in the proj
 
 This setting is a default but you should double check that it’s correct. Your project should build only active architecture in Debug configuration.
 
-![](assets/active-arch@2x.png)
+<img src="assets/active-arch@2x.png" width="488">
 
 📖 Sources:
 
@@ -104,7 +104,7 @@ By default in new projects, dSYM files aren’t generated at all for Debug build
 
 Recommended setup:
 
-![](assets/DE66AC09-3A53-4666-B10F-ADF7CECEBB20@2x.png)
+<img src="assets/dsym@2x.png" width="536">
 
 📖 Sources:
 
@@ -117,7 +117,7 @@ Another common trick is to:
 - change the optimization level to `-Onone` for Debug builds only
 - add a user-defined setting `SWIFT_WHOLE_MODULE_OPTIMIZATION` with value `YES`
 
-![](assets/wmo@2x.png)
+<img src="assets/wmo@2x.png" width="711">
 
 What this does is it instructs the compiler to:
 
@@ -179,20 +179,20 @@ Working with only one scheme is fine but we can do better. The setup we’ve bee
 ### App
 Builds only the app on cmd-B. Runs only unit tests. Useful for short iterations, e.g. on a UI code, as only the needed code gets built.
 
-![](assets/app-scheme@2x.png)
+<img src="assets/app-scheme@2x.png" width="600">
 
 ### App - Unit Test Flow
 Builds both the app and unit test target. Runs only unit tests. Useful when working on code related to unit tests, because you find about compile issues after building a project, not even having to run tests.
 
 This scheme is useful when your UI tests take too long to run them often.
 
-![](assets/app-unit-test-flow@2x.png)
+<img src="assets/app-unit-test-flow@2x.png" width="600">
 
 
 ### App - All Tests Flow
 Builds app and all test targets. Runs all tests. Useful when working on code close to UI which impacts UI tests.
 
-![](assets/app-all-tests-flow@2x.png)
+<img src="assets/app-all-tests-flow@2x.png" width="600">
 
 📖 Sources:
 
@@ -206,7 +206,8 @@ $ defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
 ```
 
 Once done, after building a project (cmd-B) you should see:
-![](assets/time@2x.png)
+
+<img src="assets/time@2x.png" width="348">
 
 I recommend comparing build times under same conditions each time, e.g.
 1. Quit Xcode.
