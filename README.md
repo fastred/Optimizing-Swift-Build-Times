@@ -8,14 +8,16 @@ Swift is constantly improving ❤️. In its current state (Swift 4), though, lo
 
 ## Table of contents
 
-- [Functions and expressions](README.md#functions-and-expressions)
-- [Slowly compiling files](README.md#slowly-compiling-files)
-- [Third-party dependencies](third-party-dependencies)
-- [Modularization](README.md#modularization)
-- [Xcode Schemes](README.md#xcode-schemes)
-- [Whole Module Optimization](README.md#whole-module-optimization)
-- [XIBs](README.md#xibs)
-- [Showing build times in Xcode](README.md#showing-build-times-in-xcode)
+- [Type checking of functions and expressions](#type-checking-of-functions-and-expressions)
+- [Slowly compiling files](#slowly-compiling-files)
+- [Build active architecture only](#build-active-architecture-only)
+- [dSYM generation](#dsym-generation)
+- [Whole Module Optimization](#whole-module-optimization)
+- [Third-party dependencies](#third-party-dependencies)
+- [Modularization](#modularization)
+- [XIBs](#xibs)
+- [Xcode Schemes](#xcode-schemes)
+- [Showing build times in Xcode](#showing-build-times-in-xcode)
 
 ## Type checking of functions and expressions
 Swift build times are slow mostly because of expensive type checking. As a workaround, you can enable compiler flags, that will instruct Xcode to show slowly compiling functions and expressions:
