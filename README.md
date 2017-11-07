@@ -21,7 +21,8 @@ Swift is constantly improving ❤️. In its current state (Swift 4), though, lo
 
 # Type checking of functions and expressions
 Swift build times are slow mostly because of expensive type checking. As a workaround, you can enable compiler flags, that will instruct Xcode to show slowly compiling functions and expressions:
-![](assets/xcode-warning@2x.png)
+
+<img src="assets/xcode-warning@2x.png" width="801">
 
 To do that add:
 - `-Xfrontend -warn-long-function-bodies=100` (`100` means 100ms here, you should experiment with this value depending on you computer speed and project)
