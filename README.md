@@ -36,6 +36,8 @@ Build again and you should now see warnings like these:
 
 Next step is to address code that Swift compiler has problems with. [John Sundell](https://www.swiftbysundell.com/posts/improving-swift-compile-times) and [Robert Gummesson](https://medium.com/@RobertGummesson/regarding-swift-build-time-optimizations-fc92cdd91e31) are here to help you with that.
 
+⚠️ Warning: This technique doesn’t work for targets using Whole Module Optimization. Please temporarily disable WMO if you have it enabled.
+
 📖 Sources:
 
 - [Guarding Against Long Compiles](http://khanlou.com/2016/12/guarding-against-long-compiles/)
