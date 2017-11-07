@@ -6,7 +6,7 @@ Swift is constantly improving ❤️. In its current state (Swift 4), though, lo
 
 👷🏻 Maintainer: [Arek Holko](https://twitter.com/arekholko). Anything missing? Issues and pull requests welcomed!
 
-## Table of contents
+# Table of contents
 
 - [Type checking of functions and expressions](#type-checking-of-functions-and-expressions)
 - [Slowly compiling files](#slowly-compiling-files)
@@ -19,7 +19,7 @@ Swift is constantly improving ❤️. In its current state (Swift 4), though, lo
 - [Xcode Schemes](#xcode-schemes)
 - [Showing build times in Xcode](#showing-build-times-in-xcode)
 
-## Type checking of functions and expressions
+# Type checking of functions and expressions
 Swift build times are slow mostly because of expensive type checking. As a workaround, you can enable compiler flags, that will instruct Xcode to show slowly compiling functions and expressions:
 ![](assets/xcode-warning@2x.png)
 
@@ -38,7 +38,7 @@ Once done, you should address issues found by these warnings. See common reasons
 - [Measuring Swift compile times in Xcode 9 · Jesse Squires](https://www.jessesquires.com/blog/measuring-compile-times-xcode9/)
 - [Improving Swift compile times — Swift by Sundell](https://www.swiftbysundell.com/posts/improving-swift-compile-times)
 
-## Slowly compiling files
+# Slowly compiling files
 Previous section described working on an expression and function-level but it’s also often interesting to know compile times of whole files.
 
 There’s no UI in Xcode for that, though, so you have to build the project from the CLI with correct flags set:
@@ -82,7 +82,7 @@ You’ll end up with `slowest.log` file containing list of all files in the proj
 📖 Sources:
 * [Diving into Swift compiler performance](https://koke.me/2017/03/24/diving-into-swift-compiler-performance/)
 
-## Build active architecture only
+# Build active architecture only
 This setting is a default but you should double check that it’s correct. Your project should build only active architecture in Debug configuration.
 
 ![](assets/active-arch@2x.png)
@@ -90,7 +90,7 @@ This setting is a default but you should double check that it’s correct. Your 
 📖 Sources:
 - [What is Build Active Architecture Only](http://samwize.com/2015/01/14/what-is-build-active-architecture-only/)
 
-## dSYM generation
+# dSYM generation
 By default in new projects, dSYM files aren’t generated at all for Debug builds. However, it’s sometimes useful to have them available when running on a device – to be able to analyze crashes happening without the debugger attached.
 
 Recommended setup:
@@ -100,7 +100,7 @@ Recommended setup:
 📖 Sources:
 - [Speeding up Development Build Times With Conditional dSYM Generation](http://holko.pl/2016/10/18/dsym-debug/)
 
-## Whole Module Optimization
+# Whole Module Optimization
 Another trick is to:
 - change the optimization level to `-Onone` for Debug builds only
 - add a user-defined setting `SWIFT_WHOLE_MODULE_OPTIMIZATION` with value `YES`
@@ -121,7 +121,7 @@ Note that incremental builds with minimal changes seem to be a bit slower under 
 - [Developear - Speeding Up Compile Times of Swift Projects](http://developear.com/blog/2016/12/30/Speed-Swift-Compilation.html)
 - [Slava Pestov on Twitter: “@iamkevb It runs one compiler job with all source files in a module instead of one job per source file”](https://twitter.com/slava_pestov/status/911747257103302656)
 
-## Third-party dependencies
+# Third-party dependencies
 There are two ways you can embed third-party dependencies in your projects:
 1. as a source that gets compiled each time you perform a clean build of your project (examples: CocoaPods, git submodules, copy-pasted code, internal libraries in subprojects that the app target depends on)
 2. as a prebuilt framework/library (examples: Carthage, static library distributed by a vendor that doesn’t want to provide the source code)
@@ -133,7 +133,7 @@ Carthage, even though it’s harder to use, is a better choice if you care about
 📖 Sources:
 - time spent waiting for Xcode to finish builds 😅
 
-## Modularization
+# Modularization
 Incremental compilation in Swift isn’t perfect. There are projects where changing one string somewhere causes almost a whole project to be recompiled during an incremental build. It’s something that can be debugged and improved but a good tooling for that isn’t available.
 
 To avoid issues like that, you should consider splitting your app into modules. In iOS these are either: dynamic frameworks or static libraries (support for Swift was added in Xcode 9).
@@ -144,13 +144,13 @@ Let’s say your app target depends on an internal framework called `DatabaseKit
 - [Technical Note TN2435 – Embedding Frameworks In An App](https://developer.apple.com/library/content/technotes/tn2435/_index.html)
 - [uFeatures](https://github.com/microfeatures/guidelines)
 
-## XIBs
+# XIBs
 XIBs/storyboards vs. code. 🔥 It’s as hot a topic as they go but let’s not discuss it fully here. What’s interesting is that when you change the contents of a file in Interface Builder, only that file gets compiled to NIB format (with `ibtool`). On the other hand, Swift compiler may decide to recompile a big part of your project e.g. when you change a single line in a public method in a `UIView`.
 
 📖 Sources:
 - [(…) in a large project incremental build is much faster if only a .xib was changed (vs. only a line of Swift UI code)](https://twitter.com/MichalCiuba/status/925326831074643968)
 
-## Xcode Schemes
+# Xcode Schemes
 Let’s say we have a common project setup with 3 targets:
 - `App`
 - `AppTests`
@@ -179,7 +179,7 @@ Builds app and all test targets. Runs all tests. Useful when working on code clo
 📖 Sources:
 - [All About Schemes](http://pilky.me/17/)
 
-## Showing build times in Xcode
+# Showing build times in Xcode
 Finally, to be able to actually know whether your build times are improving, you should enable showing them in Xcode’s UI. To do that, run this from the command line:
 
 ```
