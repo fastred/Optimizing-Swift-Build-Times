@@ -184,7 +184,7 @@ Builds only the app on cmd-B. Runs only unit tests. Useful for short iterations,
 <img src="assets/app-scheme@2x.png" width="600">
 
 ### App - Unit Test Flow
-Builds both the app and unit test target. Runs only unit tests. Useful when working on code related to unit tests, because you find about compile issues after building a project, not even having to run tests.
+Builds both the app and unit test target. Runs only unit tests. Useful when working on code related to unit tests, because you find about compile errors in tests immediately after building a project, not even having to run them!
 
 This scheme is useful when your UI tests take too long to run them often.
 
