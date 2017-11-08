@@ -220,7 +220,7 @@ I recommend comparing build times under same conditions each time, e.g.
 Alternatively, you can time builds from the command line:
 
 ```
-$ time xcodebuid other params
+$ time xcodebuild other params
 ```
 
 📖 Sources:
