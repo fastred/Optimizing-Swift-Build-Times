@@ -116,10 +116,10 @@ Recommended setup:
 
 Another common trick is to:
 
-- change the optimization level to `-Onone` for Debug builds only
-- add a user-defined setting `SWIFT_WHOLE_MODULE_OPTIMIZATION` with value `YES`
+- change `Optimization Level` to `Fast, Whole Module Optimization` for Debug configuration
+- add `-Onone` flag to `Other Swift Flags` **only for Debug configuration**
 
-<img src="assets/wmo@2x.png" width="711">
+<img src="assets/wmo_9@2x.png" width="767">
 
 What this does is it instructs the compiler to:
 
@@ -129,7 +129,7 @@ What this does is it instructs the compiler to:
 >   
 > It's a bug that it's faster; we need to do less duplicated work. Improving this is a goal going forward  
 
-Note that incremental builds with minimal changes seem to be a bit slower under this setup. You should see a vast speedup (2x in many projects) in a worst-case scenario.
+Note that incremental builds with minimal changes seem to be a bit slower under this setup. You should see a vast speedup (2x in many projects) in a worst-case scenario, though.
 
 📖 Sources:
 
