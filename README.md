@@ -28,7 +28,7 @@ Swift build times are slow mostly because of expensive type checking. By default
 
 to `Other Swift Flags` in build settings:
 
-<img src="assets/times@2x.png" width="732">
+<img src="assets/times@2x.png" width="795">
 
 Build again and you should now see warnings like these:
 
@@ -119,7 +119,7 @@ Another common trick is to:
 - change `Optimization Level` to `Fast, Whole Module Optimization` for Debug configuration
 - add `-Onone` flag to `Other Swift Flags` **only for Debug configuration**
 
-<img src="assets/wmo_9@2x.png" width="767">
+<img src="assets/wmo_9@2x.png" width="792">
 
 What this does is it instructs the compiler to:
 
