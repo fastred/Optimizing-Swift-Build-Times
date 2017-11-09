@@ -53,7 +53,7 @@ There’s no UI in Xcode for that, though, so you have to build the project from
 ```sh
 xcodebuild -destination 'platform=iOS Simulator,name=iPhone 8' \
   -sdk iphonesimulator -project YourProject.xcodeproj \
-  -scheme Chuck -configuration Debug \
+  -scheme YourScheme -configuration Debug \
   clean build \
   OTHER_SWIFT_FLAGS="-driver-time-compilation \
     -Xfrontend -debug-time-function-bodies \
