@@ -18,6 +18,7 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 - [XIBs](#xibs)
 - [Xcode Schemes](#xcode-schemes)
 - [Showing build times in Xcode](#showing-build-times-in-xcode)
+- [Use the new Xcode build system](#use-the-new-xcode-build-system)
 
 # Type checking of functions and expressions
 
