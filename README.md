@@ -226,3 +226,12 @@ $ time xcodebuild other params
 📖 Sources:
 
 - [How to enable build timing in Xcode? - Stack Overflow](https://stackoverflow.com/a/2801156/1990236)
+
+# Use the new Xcode build system
+In Xcode 9 Apple [quietly introduced a new build system].  This is a “preview” and is not enabled by default.
+It can be significantly faster than the default build system.
+To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system preview. 
+
+📖 Sources:
+
+- [Faster Swift Builds with the New Xcode Build System](https://github.com/quellish/XcodeNewBuildSystem)
