@@ -17,8 +17,8 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 - [Modularization](#modularization)
 - [XIBs](#xibs)
 - [Xcode Schemes](#xcode-schemes)
-- [Showing build times in Xcode](#showing-build-times-in-xcode)
 - [Use the new Xcode build system](#use-the-new-xcode-build-system)
+- [Showing build times in Xcode](#showing-build-times-in-xcode)
 
 # Type checking of functions and expressions
 
@@ -201,6 +201,16 @@ Builds the app and all test targets. Runs all tests. Useful when working on code
 
 - [All About Schemes](http://pilky.me/17/)
 
+
+# Use the new Xcode build system
+In Xcode 9 Apple [quietly introduced a new build system](https://developer.apple.com/library/content/releasenotes/DeveloperTools/RN-Xcode/Chapters/Introduction.html#//apple_ref/doc/uid/TP40001051-CH1-SW878).  This is a “preview” and is not enabled by default.
+It can be significantly faster than the default build system.
+To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system preview. 
+
+📖 Sources:
+
+- [Faster Swift Builds with the New Xcode Build System](https://github.com/quellish/XcodeNewBuildSystem)
+
 # Showing build times in Xcode
 Finally, to be able to actually know whether your build times are improving, you should enable showing them in Xcode’s UI. To do that, run this from the command line:
 
@@ -227,12 +237,3 @@ $ time xcodebuild other params
 📖 Sources:
 
 - [How to enable build timing in Xcode? - Stack Overflow](https://stackoverflow.com/a/2801156/1990236)
-
-# Use the new Xcode build system
-In Xcode 9 Apple [quietly introduced a new build system](https://developer.apple.com/library/content/releasenotes/DeveloperTools/RN-Xcode/Chapters/Introduction.html#//apple_ref/doc/uid/TP40001051-CH1-SW878).  This is a “preview” and is not enabled by default.
-It can be significantly faster than the default build system.
-To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system preview. 
-
-📖 Sources:
-
-- [Faster Swift Builds with the New Xcode Build System](https://github.com/quellish/XcodeNewBuildSystem)
