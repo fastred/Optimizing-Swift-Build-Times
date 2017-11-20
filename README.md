@@ -137,6 +137,26 @@ Note that incremental builds with minimal changes seem to be a bit slower under 
 - [Developear - Speeding Up Compile Times of Swift Projects](http://developear.com/blog/2016/12/30/Speed-Swift-Compilation.html)
 - [Slava Pestov on Twitter: “@iamkevb It runs one compiler job with all source files in a module instead of one job per source file”](https://twitter.com/slava_pestov/status/911747257103302656)
 
+## Whole Module Optimization for CocoaPods
+
+If you use CocoaPods, you should also consider enabling WMO without optimization in your `Pods` project.
+To do that, you have to add the following `post_install` hook to your `Podfile`:
+
+```ruby
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if config.name == 'Debug'
+        config.build_settings['OTHER_SWIFT_FLAGS'] = '-Onone'
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
+      end
+    end
+  end
+end
+```
+
+and then run `$ pod install`. Make sure to compare build times before and after this change to confirm there's an improvement.
+
 # Third-party dependencies
 
 There are two ways you can embed third-party dependencies in your projects:
@@ -205,7 +225,7 @@ Builds the app and all test targets. Runs all tests. Useful when working on code
 # Use the new Xcode build system
 In Xcode 9 Apple [quietly introduced a new build system](https://developer.apple.com/library/content/releasenotes/DeveloperTools/RN-Xcode/Chapters/Introduction.html#//apple_ref/doc/uid/TP40001051-CH1-SW878).  This is a “preview” and is not enabled by default.
 It can be significantly faster than the default build system.
-To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system preview. 
+To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system preview.
 
 📖 Sources:
 
