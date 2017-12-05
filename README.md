@@ -83,8 +83,6 @@ You’ll end up with `slowest.log` file containing list of all files in the proj
 2.4605 (  0.3%)  {compile: SlideInPresentationAnimator.o <= SlideInPresentationAnimator.swift }
 ```
 
-⚠️ Warning: This technique doesn’t work for targets using Whole Module Optimization. Please temporarily disable WMO if you have it enabled.
-
 📖 Sources:
 
 - [Diving into Swift compiler performance](https://koke.me/2017/03/24/diving-into-swift-compiler-performance/)
