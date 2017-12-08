@@ -227,6 +227,26 @@ To enable it, go to Workspace or Project Settings from the File menu in Xcode. T
 
 - [Faster Swift Builds with the New Xcode Build System](https://github.com/quellish/XcodeNewBuildSystem)
 
+# Enable Concurrent Swift Build Tasks
+Xcode 9.2 has experimental support for increasing the number of concurrent build tasks for Swift projects. For some projects this may greatly improve build times. Note that when this option is enabled Xcode may use significantly more memory.
+
+To enable this feature, quit Xcode and enter this command in a Terminal window:
+
+```
+$defaults write com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively -bool NO
+```
+
+Test wether this benefits your project. For many projects it may not make a difference, but for others the savings may be very significant.
+To disable this feature enter this in a Terminal window and restart Xcode:
+
+```
+$defaults delete com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively
+```
+
+📖 Sources:
+
+- [Even faster Swift build times with Xcode 9.2](https://github.com/quellish/XcodeConcurrentSwiftBuilds)
+
 # Showing build times in Xcode
 Finally, to be able to actually know whether your build times are improving, you should enable showing them in Xcode’s UI. To do that, run this from the command line:
 
