@@ -237,7 +237,7 @@ To enable this feature, quit Xcode and enter this command in a Terminal window:
 $defaults write com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively -bool NO
 ```
 
-Test wether this benefits your project. For many projects it may not make a difference, but for others the savings may be very significant.
+Test whether this benefits your project. For many projects it may not make a difference, but for others the savings may be very significant.
 To disable this feature enter this in a Terminal window and restart Xcode:
 
 ```
