@@ -152,6 +152,23 @@ post_install do |installer|
 end
 ```
 
+If you use new Xcode build system and show the alert "Target Pods cannot link framework Foundation.framework", prefere use this `post_install`
+
+```ruby
+post_install do |installer|
+  podsTargets = installer.pods_project.targets.find_all { |target| target.name.start_with?('Pods') }
+  podsTargets.each do |target|
+    target.frameworks_build_phase.clear
+    target.build_configurations.each do |config|
+      if config.name == 'Debug'
+        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
+      end
+    end
+  end
+end
+```
+
 and then run `$ pod install`. Make sure to compare build times before and after this change to confirm there's an improvement.
 
 # Third-party dependencies
