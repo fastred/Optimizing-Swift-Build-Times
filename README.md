@@ -30,7 +30,7 @@ Swift build times are slow mostly because of expensive type checking. By default
 
 to `Other Swift Flags` in build settings:
 
-<img src="assets/times@2x.png" width="795">
+<img src="assets/times@2x.png" width="801">
 
 Build again and you should now see warnings like these:
 
