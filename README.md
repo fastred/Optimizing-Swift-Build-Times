@@ -8,11 +8,11 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 
 # Table of contents
 
+- [Incremental Compilation Mode with No Optimization](#incremental-compilation-mode-with-no-optimization)
 - [Type checking of functions and expressions](#type-checking-of-functions-and-expressions)
 - [Slowly compiling files](#slowly-compiling-files)
 - [Build active architecture only](#build-active-architecture-only)
 - [dSYM generation](#dsym-generation)
-- [Whole Module Optimization](#whole-module-optimization)
 - [Third-party dependencies](#third-party-dependencies)
 - [Modularization](#modularization)
 - [XIBs](#xibs)
@@ -20,6 +20,18 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 - [Use the new Xcode build system](#use-the-new-xcode-build-system)
 - [Enable concurrent Swift build tasks](#enable-concurrent-swift-build-tasks)
 - [Showing build times in Xcode](#showing-build-times-in-xcode)
+
+# Incremental Compilation Mode with No Optimization
+
+Until Xcode 10, it was common to enable [Whole Module Optimization](https://github.com/fastred/Optimizing-Swift-Build-Times/blob/ce6da1f3a47220259c3924df62f44f06bc45e222/README.md#whole-module-optimization) to speed up Debug builds. It was a workaround that's no longer needed in Xcode 10!
+
+Currently, the recommended setup is to have `Incremental` `Compilation Mode` set for Debug builds and `Whole Module` for Release builds. Also, `No Optimization` should be chosen for `Optimization Level` setting of Debug builds. 
+
+<img src="assets/compilation-and-optimization@2x.png" width="551">
+
+📖 Sources:
+
+- [What's New in Swift – WWDC 2018](https://developer.apple.com/videos/play/wwdc2018/401/?time=657)
 
 # Type checking of functions and expressions
 
@@ -30,7 +42,7 @@ Swift build times are slow mostly because of expensive type checking. By default
 
 to `Other Swift Flags` in build settings:
 
-<img src="assets/times@2x.png" width="795">
+<img src="assets/times@2x.png" width="801">
 
 Build again and you should now see warnings like these:
 
@@ -110,50 +122,6 @@ Recommended setup:
 
 - [Speeding up Development Build Times With Conditional dSYM Generation](http://holko.pl/2016/10/18/dsym-debug/)
 
-# Whole Module Optimization
-
-Another common trick is to:
-
-- change `Optimization Level` to `Fast, Whole Module Optimization` for Debug configuration
-- add `-Onone` flag to `Other Swift Flags` **only for Debug configuration**
-
-<img src="assets/wmo_9@2x.png" width="792">
-
-What this does is it instructs the compiler to:
-
-> It runs one compiler job with all source files in a module instead of one job per source file  
->   
-> Less parallelism but also less duplicated work  
->   
-> It's a bug that it's faster; we need to do less duplicated work. Improving this is a goal going forward  
-
-Note that incremental builds with minimal changes seem to be a bit slower under this setup. You should see a vast speedup (2x in many projects) in a worst-case scenario, though.
-
-📖 Sources:
-
-- [Developear - Speeding Up Compile Times of Swift Projects](http://developear.com/blog/2016/12/30/Speed-Swift-Compilation.html)
-- [Slava Pestov on Twitter: “@iamkevb It runs one compiler job with all source files in a module instead of one job per source file”](https://twitter.com/slava_pestov/status/911747257103302656)
-
-## Whole Module Optimization for CocoaPods
-
-If you use CocoaPods, you should also consider enabling WMO without optimization in your `Pods` project.
-To do that, you have to add the following `post_install` hook to your `Podfile`:
-
-```ruby
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      if config.name == 'Debug'
-        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
-        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
-      end
-    end
-  end
-end
-```
-
-and then run `$ pod install`. Make sure to compare build times before and after this change to confirm there's an improvement.
-
 # Third-party dependencies
 
 There are two ways you can embed third-party dependencies in your projects:
@@ -220,33 +188,13 @@ Builds the app and all test targets. Runs all tests. Useful when working on code
 
 
 # Use the new Xcode build system
-In Xcode 9 Apple [quietly introduced a new build system](https://developer.apple.com/library/content/releasenotes/DeveloperTools/RN-Xcode/Chapters/Introduction.html#//apple_ref/doc/uid/TP40001051-CH1-SW878).  This is a “preview” and is not enabled by default.
-It can be significantly faster than the default build system.
-To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system preview.
+In Xcode 9 Apple [introduced a new build system](https://developer.apple.com/library/content/releasenotes/DeveloperTools/RN-Xcode/Chapters/Introduction.html#//apple_ref/doc/uid/TP40001051-CH1-SW878). To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system.
+
+<img src="assets/new_build_system@2x.png" width="536">
 
 📖 Sources:
 
 - [Faster Swift Builds with the New Xcode Build System](https://github.com/quellish/XcodeNewBuildSystem)
-
-# Enable Concurrent Swift Build Tasks
-Xcode 9.2 has experimental support for increasing the number of concurrent build tasks for Swift projects. For some projects this may greatly improve build times. Note that when this option is enabled Xcode may use significantly more memory.
-
-To enable this feature, quit Xcode and enter this command in a Terminal window:
-
-```
-$defaults write com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively -bool NO
-```
-
-Test whether this benefits your project. For many projects it may not make a difference, but for others the savings may be very significant.
-To disable this feature enter this in a Terminal window and restart Xcode:
-
-```
-$defaults delete com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively
-```
-
-📖 Sources:
-
-- [Even faster Swift build times with Xcode 9.2](https://github.com/quellish/XcodeConcurrentSwiftBuilds)
 
 # Showing build times in Xcode
 Finally, to be able to actually know whether your build times are improving, you should enable showing them in Xcode’s UI. To do that, run this from the command line:
