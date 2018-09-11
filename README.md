@@ -8,11 +8,11 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 
 # Table of contents
 
+- [Incremental Compilation Mode with No Optimization](#incremental-compilation-mode-with-no-optimization)
 - [Type checking of functions and expressions](#type-checking-of-functions-and-expressions)
 - [Slowly compiling files](#slowly-compiling-files)
 - [Build active architecture only](#build-active-architecture-only)
 - [dSYM generation](#dsym-generation)
-- [Incremental Compilation Mode with No Optimization](#incremental-compilation-mode-with-no-optimization)
 - [Third-party dependencies](#third-party-dependencies)
 - [Modularization](#modularization)
 - [XIBs](#xibs)
@@ -20,6 +20,18 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 - [Use the new Xcode build system](#use-the-new-xcode-build-system)
 - [Enable concurrent Swift build tasks](#enable-concurrent-swift-build-tasks)
 - [Showing build times in Xcode](#showing-build-times-in-xcode)
+
+# Incremental Compilation Mode with No Optimization
+
+Until Xcode 10, it was common to enable [Whole Module Optimization](https://github.com/fastred/Optimizing-Swift-Build-Times/blob/ce6da1f3a47220259c3924df62f44f06bc45e222/README.md#whole-module-optimization) to speed up Debug builds. It was a workaround that's no longer needed in Xcode 10!
+
+Currently, the recommended setup is to have `Incremental` `Compilation Mode` set for Debug builds and `Whole Module` for Release builds. Also, `No Optimization` should be chosen for `Optimization Level` of Debug builds. 
+
+<img src="assets/compilation-and-optimization@2x.png" width="551">
+
+📖 Sources:
+
+- [What's New in Swift – WWDC 2018](https://developer.apple.com/videos/play/wwdc2018/401/?time=657)
 
 # Type checking of functions and expressions
 
@@ -109,18 +121,6 @@ Recommended setup:
 📖 Sources:
 
 - [Speeding up Development Build Times With Conditional dSYM Generation](http://holko.pl/2016/10/18/dsym-debug/)
-
-# Incremental Compilation Mode with No Optimization
-
-Until Xcode 10, it was common to enable [Whole Module Optimization](https://github.com/fastred/Optimizing-Swift-Build-Times/blob/ce6da1f3a47220259c3924df62f44f06bc45e222/README.md#whole-module-optimization) to speed up Debug builds. It was a workaround that's no longer needed in Xcode 10!
-
-Currently, the recommended setup is to have `Incremental` `Compilation Mode` set for Debug builds and `Whole Module` for Release builds. Also, `No Optimization` should be chosen for `Optimization Level` of Debug builds. 
-
-<img src="assets/compilation-and-optimization@2x.png" width="551">
-
-📖 Sources:
-
-- [What's New in Swift – WWDC 2018](https://developer.apple.com/videos/play/wwdc2018/401/?time=657)
 
 # Third-party dependencies
 
