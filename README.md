@@ -12,7 +12,7 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 - [Slowly compiling files](#slowly-compiling-files)
 - [Build active architecture only](#build-active-architecture-only)
 - [dSYM generation](#dsym-generation)
-- [Whole Module Optimization](#whole-module-optimization)
+- [Incremental Compilation Mode with No Optimization](#incremental-compilation-mode-with-no-optimization)
 - [Third-party dependencies](#third-party-dependencies)
 - [Modularization](#modularization)
 - [XIBs](#xibs)
@@ -110,49 +110,17 @@ Recommended setup:
 
 - [Speeding up Development Build Times With Conditional dSYM Generation](http://holko.pl/2016/10/18/dsym-debug/)
 
-# Whole Module Optimization
+# Incremental Compilation Mode with No Optimization
 
-Another common trick is to:
+Until Xcode 10, it was common to enable [Whole Module Optimization](https://github.com/fastred/Optimizing-Swift-Build-Times/blob/ce6da1f3a47220259c3924df62f44f06bc45e222/README.md#whole-module-optimization) to speed up Debug builds. It was a workaround that's no longer needed in Xcode 10!
 
-- change `Optimization Level` to `Fast, Whole Module Optimization` for Debug configuration
-- add `-Onone` flag to `Other Swift Flags` **only for Debug configuration**
+Currently, the recommended setup is to have `Incremental` `Compilation Mode` used in Debug builds and `Whole Module` `Compilation Mode` in Release builds. Also, `No Optimization` should be chosen for `Optimization Level` in Debug builds. 
 
-<img src="assets/wmo_9@2x.png" width="792">
-
-What this does is it instructs the compiler to:
-
-> It runs one compiler job with all source files in a module instead of one job per source file  
->   
-> Less parallelism but also less duplicated work  
->   
-> It's a bug that it's faster; we need to do less duplicated work. Improving this is a goal going forward  
-
-Note that incremental builds with minimal changes seem to be a bit slower under this setup. You should see a vast speedup (2x in many projects) in a worst-case scenario, though.
+<img src="assets/compilation-and-optimization@2x.png" width="551">
 
 📖 Sources:
 
-- [Developear - Speeding Up Compile Times of Swift Projects](http://developear.com/blog/2016/12/30/Speed-Swift-Compilation.html)
-- [Slava Pestov on Twitter: “@iamkevb It runs one compiler job with all source files in a module instead of one job per source file”](https://twitter.com/slava_pestov/status/911747257103302656)
-
-## Whole Module Optimization for CocoaPods
-
-If you use CocoaPods, you should also consider enabling WMO without optimization in your `Pods` project.
-To do that, you have to add the following `post_install` hook to your `Podfile`:
-
-```ruby
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      if config.name == 'Debug'
-        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
-        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
-      end
-    end
-  end
-end
-```
-
-and then run `$ pod install`. Make sure to compare build times before and after this change to confirm there's an improvement.
+- [What's New in Swift – WWDC 2018](https://developer.apple.com/videos/play/wwdc2018/401/?time=657)
 
 # Third-party dependencies
 
