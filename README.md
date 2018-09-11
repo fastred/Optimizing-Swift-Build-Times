@@ -188,9 +188,9 @@ Builds the app and all test targets. Runs all tests. Useful when working on code
 
 
 # Use the new Xcode build system
-In Xcode 9 Apple [quietly introduced a new build system](https://developer.apple.com/library/content/releasenotes/DeveloperTools/RN-Xcode/Chapters/Introduction.html#//apple_ref/doc/uid/TP40001051-CH1-SW878).  This is a “preview” and is not enabled by default.
-It can be significantly faster than the default build system.
-To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system preview.
+In Xcode 9 Apple [introduced a new build system](https://developer.apple.com/library/content/releasenotes/DeveloperTools/RN-Xcode/Chapters/Introduction.html#//apple_ref/doc/uid/TP40001051-CH1-SW878). To enable it, go to Workspace or Project Settings from the File menu in Xcode. There you can switch build systems to the new build system.
+
+<img src="assets/new_build_system@2x.png" width="536">
 
 📖 Sources:
 
