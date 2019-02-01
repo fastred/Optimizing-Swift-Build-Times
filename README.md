@@ -18,7 +18,6 @@ Swift is constantly improving ❤️. For the time being, though, long compile t
 - [XIBs](#xibs)
 - [Xcode Schemes](#xcode-schemes)
 - [Use the new Xcode build system](#use-the-new-xcode-build-system)
-- [Enable concurrent Swift build tasks](#enable-concurrent-swift-build-tasks)
 - [Showing build times in Xcode](#showing-build-times-in-xcode)
 
 # Incremental Compilation Mode with No Optimization
